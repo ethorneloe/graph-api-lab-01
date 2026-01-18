@@ -253,7 +253,7 @@ Certreq -attrib "CertificateTemplate:YourCertificateTemplate" -submit  "C:\temp
 18. Follow the same steps in `Option 1 - Self-signed certificate` earlier to upload and connect with the certificate thumbprint.
 
 # Part 5 - Create an automation account with a system-assigned managed identity
-An automation account allows us to create runbooks which can be executed in the context of a system-assigned managed identity.  For now we are just creating a new resource group and an automation account.  Later we will use this to create a runbook and connect to Graph as the managed identity bound to the automation account.  Note that in order to complete the below instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
+An automation account allows us to create PowerShell runbooks, which can be executed in the context of a system-assigned managed identity.  Note that in order to complete these instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
 
 1. Connect to your subscription using the Az module. 
 ```
