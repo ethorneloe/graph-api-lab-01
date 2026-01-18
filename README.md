@@ -296,10 +296,71 @@ New-MgServicePrincipalAppRoleAssignment `
 Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 ```
 
+4. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
+```
+# Create the runbook script content
+$runbookContent = @'
+# Connect to Microsoft Graph using managed identity
+Connect-MgGraph -Identity
 
+# Get users
+$users = Get-MgUser -Top 10 -Property DisplayName, UserPrincipalName, Id
 
+# Output results
+foreach ($user in $users) {
+    Write-Output "Name: $($user.DisplayName), UPN: $($user.UserPrincipalName)"
+}
 
+Disconnect-MgGraph
+'@
 
+# Save to temporary file
+$tempFile = "$env:TEMP\Get-EntraUsers.ps1"
+$runbookContent | Out-File -FilePath $tempFile -Encoding UTF8
+
+# Import the runbook with content
+Import-AzAutomationRunbook `
+    -ResourceGroupName $resourceGroup `
+    -AutomationAccountName $automationAccount `
+    -Name "Get-EntraUsers" `
+    -Type PowerShell `
+    -Path $tempFile `
+    -Published
+
+# Clean up temp file
+Remove-Item $tempFile
+```
+
+5. Create a new job to execute the runbook.
+```
+$job = Start-AzAutomationRunbook `
+    -ResourceGroupName $resourceGroup `
+    -AutomationAccountName $automationAccount `
+    -Name "Get-EntraUsers"
+
+# Display the job ID
+Write-Host "Job ID: $($job.JobId)"
+```
+
+6. Wait a minute or so and run the following. If the job is not yet completed, wait another minute or so and run this again.
+```
+Get-AzAutomationJob `
+    -ResourceGroupName $resourceGroup `
+    -AutomationAccountName $automationAccount `
+    -Id $job.JobId | Select-Object Status, StartTime, EndTime
+```
+7. View the output of the job.  You should see user data.
+```
+Get-AzAutomationJobOutput `
+    -ResourceGroupName $resourceGroup `
+    -AutomationAccountName $automationAccount `
+    -Id $job.JobId `
+    -Stream Output | Get-AzAutomationJobOutputRecord | Select-Object -ExpandProperty Value
+```
+
+# Review
+
+In this lab we created an app registration, assigned it Graph API permissions, and then used it to connect to Entra with a client secret and a certificate.  We also created an automation account with a system-assigned managed identity, assigned the managed identity Graph API permissions, and deployed a new runbook that executes in the context of the managed identity to extract user data.
 
 
 
