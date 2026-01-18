@@ -75,52 +75,7 @@ In order to connect to the Graph API as an application, we must first register a
 <br />
 <br />
 
-# Part 3 - Create an automation account with a system-assigned managed identity
-An automation account allows us to create runbooks which can be executed in the context of a system-assigned managed identity.  For now we are just creating a new resource group and an automation account.  Later we will use this to create a runbook and connect to Graph as the managed identity bound to the automation account.  Note that in order to complete the below instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
-
-1. Connect to your subscription using the Az module. 
-```
-Connect-AzAccount
-Set-AzContext -Subscription "your-subscription-name"
-```
-2. Edit the snippet below as required, and run it to create the new automation account. This will also create the system-assigned managed identity.
-```
-# Variables
-$resourceGroup = "rg-graph-api-lab-01"
-$location = "australiaeast"
-$automationAccount = "aa-graph-api-lab-01"
-
-# Create resources
-New-AzResourceGroup -Name $resourceGroup -Location $location
-
-New-AzAutomationAccount `
-    -ResourceGroupName $resourceGroup `
-    -Name $automationAccount `
-    -Location $location `
-    -Plan Basic `
-    -AssignSystemIdentity
-```
-3. Grant API permissions to the system-assigned managed identity
-Earlier we granted API permissions graphically, but for this exercise we will use the Az module.
-```
-$identity = (Get-AzAutomationAccount -ResourceGroupName $resourceGroup -Name $automationAccount).Identity.PrincipalId
-Write-Host "Managed Identity Object ID: $identity"
-
-Connect-MgGraph
-# Assign User.Read.All permission to the managed identity
-$appRoleId = "df021288-bdef-4463-88db-98f22de89214" # User.Read.All
-$resourceId = (Get-MgServicePrincipal -Filter "displayName eq 'Microsoft Graph'").Id
-
-New-MgServicePrincipalAppRoleAssignment `
-    -ServicePrincipalId $identity `
-    -PrincipalId $identity `
-    -AppRoleId $appRoleId `
-    -ResourceId $resourceId
-
-Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
-```
-
-# Part 4 - Create a client secret and retrieve user information
+# Part 3 - Create a client secret and retrieve user information
 1. Select the `Certificates and Secrets` section, then select `Client secrets` and click on `New client secret`
 <img width="724" height="547" alt="image" src="https://github.com/user-attachments/assets/22efa8f7-1889-4600-88a3-91c3b72b3716" />
 <br />
@@ -152,7 +107,7 @@ Connect-MgGraph -TenantId $tenantId -ClientSecretCredential $cred
 <br />
 <br />
 
-# Part 5 - Configure a certificate and retrieve user information
+# Part 4 - Configure a certificate and retrieve user information
 ## Option 1 - Self-signed certificate
 
 1. Run the following command to generage a new self-signed certificate.
@@ -297,7 +252,50 @@ Certreq -attrib "CertificateTemplate:YourCertificateTemplate" -submit  "C:\temp
 
 18. Follow the same steps in `Option 1 - Self-signed certificate` earlier to upload and connect with the certificate thumbprint.
 
-# Part 6 - Create a runbook and extract user information with a managed identity
+# Part 5 - Create an automation account with a system-assigned managed identity
+An automation account allows us to create runbooks which can be executed in the context of a system-assigned managed identity.  For now we are just creating a new resource group and an automation account.  Later we will use this to create a runbook and connect to Graph as the managed identity bound to the automation account.  Note that in order to complete the below instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
+
+1. Connect to your subscription using the Az module. 
+```
+Connect-AzAccount
+Set-AzContext -Subscription "your-subscription-name"
+```
+2. Edit the snippet below as required, and run it to create the new automation account. This will also create the system-assigned managed identity.
+```
+# Variables
+$resourceGroup = "rg-graph-api-lab-01"
+$location = "australiaeast"
+$automationAccount = "aa-graph-api-lab-01"
+
+# Create resources
+New-AzResourceGroup -Name $resourceGroup -Location $location
+
+New-AzAutomationAccount `
+    -ResourceGroupName $resourceGroup `
+    -Name $automationAccount `
+    -Location $location `
+    -Plan Basic `
+    -AssignSystemIdentity
+```
+3. Grant API permissions to the system-assigned managed identity
+Earlier we granted API permissions graphically, but for this exercise we will use the Az module.
+```
+$identity = (Get-AzAutomationAccount -ResourceGroupName $resourceGroup -Name $automationAccount).Identity.PrincipalId
+Write-Host "Managed Identity Object ID: $identity"
+
+Connect-MgGraph
+# Assign User.Read.All permission to the managed identity
+$appRoleId = "df021288-bdef-4463-88db-98f22de89214" # User.Read.All
+$resourceId = (Get-MgServicePrincipal -Filter "displayName eq 'Microsoft Graph'").Id
+
+New-MgServicePrincipalAppRoleAssignment `
+    -ServicePrincipalId $identity `
+    -PrincipalId $identity `
+    -AppRoleId $appRoleId `
+    -ResourceId $resourceId
+
+Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
+```
 
 
 
