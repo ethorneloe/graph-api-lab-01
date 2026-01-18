@@ -277,8 +277,7 @@ New-AzAutomationAccount `
     -Plan Basic `
     -AssignSystemIdentity
 ```
-3. Grant API permissions to the system-assigned managed identity
-Earlier we granted API permissions graphically, but for this exercise we will use the Az module.
+3. Grant API permissions to the system-assigned managed identity.  Earlier we granted API permissions graphically, but for this exercise we will use the Az module.
 ```
 $identity = (Get-AzAutomationAccount -ResourceGroupName $resourceGroup -Name $automationAccount).Identity.PrincipalId
 Write-Host "Managed Identity Object ID: $identity"
