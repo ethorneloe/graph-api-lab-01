@@ -104,7 +104,7 @@ Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName
 # Part 4 - Configure a certificate and retrieve user information
 ## Option 1 - Self-signed certificate
 
-1. Run the following command to generage a new self-signed certificate.
+1. Run the following command to generate a new self-signed certificate.
 ```
 $cert = New-SelfSignedCertificate `
   -Subject "CN=graph-api-lab-01" `
