@@ -392,7 +392,7 @@ Get-AzAutomationJob `
 <br />
 <br />
 
-7. View the output of the job.  You should see user data.
+7. Run this to view the output of the job.  You should see user data.
 ```
 Get-AzAutomationJobOutput `
     -ResourceGroupName $resourceGroup `
