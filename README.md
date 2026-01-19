@@ -116,12 +116,12 @@ $cert = New-SelfSignedCertificate `
 
 ```
 
-2. Confirm the certificate was created by running this.
+2. Run this to Confirm the certificate was created.
 ```
 Get-ChildItem Cert:\CurrentUser\My | Where-Object Subject -like "*graph-api-lab-01*"
 ```
 
-3. Now run this to export the public cert.  We will upload the cert to the new app registration later.
+3. Now run this to export the public cert.
 ```
 Export-Certificate -Cert $cert -FilePath "C:\temp\graph-api-lab-01.cer"
 ```
@@ -131,7 +131,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\graph-api-lab-01.cer"
 <br />
 <br />
 
-5. Browse to `C:\temp` and add the new certificate.
+5. Browse to `C:\temp` and add the new certificate that was exported earlier.
 <img width="600" height="189" alt="image" src="https://github.com/user-attachments/assets/890e03a0-0f8d-4676-89af-90a1b8f3cbf1" />
 <img width="605" height="192" alt="image" src="https://github.com/user-attachments/assets/923fcdbd-1517-49c4-8ebc-76e119265a08" />
 <img width="584" height="267" alt="image" src="https://github.com/user-attachments/assets/637bc366-fcb4-4f2e-8e8a-8a75e47f1d01" />
