@@ -297,60 +297,29 @@ Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 <br />
 <br />
 
-4. Install the `Microsoft.Graph.Authentication` module into the Azure Automation sandbox. This is the execution environment for runbooks within the Azure cloud.
-```
-New-AzAutomationModule `
-    -ResourceGroupName $resourceGroup `
-    -AutomationAccountName $automationAccount `
-    -Name "Microsoft.Graph.Authentication" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication/2.33.0" `
-    -RuntimeVersion "7.2"
-```
-
-5. Wait a couple minutes.  Check the status of the installed modules using the command below. Once it is complete this command will show `ProvisioningState` set to `Succeeded`.
-```
-Get-AzAutomationModule `
-    -ResourceGroupName $resourceGroup `
-    -AutomationAccountName $automationAccount `
-    -RuntimeVersion "7.2" | 
-    Where-Object {$_.Name -like "Microsoft.Graph.*"} | 
-    Select-Object Name, Version, ProvisioningState, CreationTime | 
-    Format-Table -AutoSize
-```
-<img width="1052" height="92" alt="image" src="https://github.com/user-attachments/assets/ce8e63ae-2a2b-4e6f-97e8-e65e9fd00622" />
-<br />
-<br />
-
-6. Once confirmed, install the `Microsoft.Graph.Users` module. Use the same command from earlier on to check the status of the module installation.
-```
-New-AzAutomationModule `
-    -ResourceGroupName $resourceGroup `
-    -AutomationAccountName $automationAccount `
-    -Name "Microsoft.Graph.Users" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users/2.33.0" `
-    -RuntimeVersion "7.2"
-```
-
-4. Now that the modules are installed. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
+4. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
 ```
 # Create the runbook script content
 $runbookContent = @'
-#Import required modules
-Import-Module 'Microsoft.Graph.Authentication'
-Import-Module 'Microsoft.Graph.Users'
+# Connect using managed identity
+Connect-AzAccount -Identity | Out-Null
 
-# Connect to Microsoft Graph using managed identity
-Connect-MgGraph -Identity
+# Get access token for Microsoft Graph
+$token = (Get-AzAccessToken -ResourceUrl "https://graph.microsoft.com").Token
 
-# Get users
-$users = Get-MgUser -Top 10 -Property DisplayName, UserPrincipalName, Id
-
-# Output results
-foreach ($user in $users) {
-    Write-Output "Name: $($user.DisplayName), UPN: $($user.UserPrincipalName)"
+# Make REST API call to get users
+$headers = @{
+    "Authorization" = "Bearer $token"
+    "Content-Type" = "application/json"
 }
 
-Disconnect-MgGraph
+$uri = "https://graph.microsoft.com/v1.0/users?`$top=10&`$select=displayName,userPrincipalName,id"
+$response = Invoke-RestMethod -Uri $uri -Headers $headers -Method Get
+
+# Output results
+foreach ($user in $response.value) {
+    Write-Output "Name: $($user.displayName), UPN: $($user.userPrincipalName)"
+}
 '@
 
 # Save to temporary file
