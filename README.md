@@ -74,7 +74,7 @@ In order to connect to the Graph API as an application, we must first register a
 <br />
 <br />
 
-2. Name the secret `Secret` and use the default expiration setting.
+2. Name the secret `Secret1` and use the default expiration setting.
 <img width="891" height="341" alt="image" src="https://github.com/user-attachments/assets/376d10e5-3484-412a-a5be-8e5ab910ea15" />
 <br />
 <br />
