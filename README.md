@@ -116,7 +116,7 @@ $cert = New-SelfSignedCertificate `
 
 ```
 
-2. Run this to Confirm the certificate was created.
+2. Run this to confirm the certificate was created.
 ```
 Get-ChildItem Cert:\CurrentUser\My | Where-Object Subject -like "*graph-api-lab-01*"
 ```
