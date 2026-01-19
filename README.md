@@ -1,5 +1,5 @@
 # graph-api-lab-01
-Connecting to Entra with the Graph API
+Connect to Entra with the Microsoft Graph PowerShell SDK
 
 ## Goals
 1. Explore how to connect to the Graph API using a client secret, a certificate, and a managed identity in an automation account.
