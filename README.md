@@ -317,7 +317,7 @@ Get-AzAutomationModule `
     Select-Object Name, Version, ProvisioningState, CreationTime | 
     Format-Table -AutoSize
 ```
-<img width="1053" height="87" alt="image" src="https://github.com/user-attachments/assets/7fb40833-6f09-4d65-8cd2-84967d15909d" />
+<img width="1052" height="92" alt="image" src="https://github.com/user-attachments/assets/ce8e63ae-2a2b-4e6f-97e8-e65e9fd00622" />
 <br />
 <br />
 
