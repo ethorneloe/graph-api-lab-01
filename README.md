@@ -157,8 +157,11 @@ Connect-MgGraph `
 
 ```
 
-5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
-6. You should see user details output in the console.  Once confirmed disconnect your session by running `Disconnect-MgGraph`.
+5. Retrieve information for a random user by running the following. You should see user details output in the console.
+```
+Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName
+```
+6. Disconnect your session by running `Disconnect-MgGraph`.
 
 ## Option 2 - Create a certificate using internal PKI (Windows Certificate Services shown here)
 Note that this is a rough guide only for demonstration purposes.  The exact steps will depend on the certificate templates available and the certificate services configuration specific to your environment.
