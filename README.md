@@ -1,5 +1,5 @@
 # graph-api-lab-01
-Connect to Entra with the Microsoft Graph PowerShell SDK
+Connect to Entra with the Microsoft Graph PowerShell SDK.
 
 ## Goals
 1. Explore how to connect to the Graph API using a client secret, a certificate, and a managed identity in an automation account.
@@ -7,20 +7,13 @@ Connect to Entra with the Microsoft Graph PowerShell SDK
 
 
 # Part 1 - Install PowerShell Modules
-Before continuing make sure the Graph API and Az modules are installed.
+Before continuing make sure the `Microsoft.Graph` and `Az` modules are installed.
 
 1. Run `Get-Module -ListAvailable Microsoft.Graph*`
-2. If no recent Graph modules are listed, run `Install-Module Microsoft.Graph` to install all the available Graph API modules.  Alternatively, for a more targeted approach, install the specific modules required or your use case which is faster (example below).
-```
-Install-Module Microsoft.Graph.Authentication -Repository PSGallery -Scope CurrentUser
-Install-Module Microsoft.Graph.Users -Repository PSGallery -Scope CurrentUser
-Install-Module Microsoft.Graph.Groups -Repository PSGallery -Scope CurrentUser
-Install-Module Microsoft.Graph.Identity.DirectoryManagement -Repository PSGallery -Scope CurrentUser
-Install-Module Microsoft.Graph.Applications -Repository PSGallery -Scope CurrentUser
-```
+2. If no recent Graph modules are listed, run `Install-Module Microsoft.Graph -Repository PSGallery -Scope CurrentUser`
 
 3. Run `get-module -ListAvailable Az*`
-4. If no recent Az modules are listed, run `Install-Module Az`
+4. If no recent Az modules are listed, run `Install-Module Az -Repository PSGallery -Scope CurrentUser`
 
 # Part 2 - Create a new app registration and assign API permissions
 In order to connect to the Graph API as an application, we must first register an application in Entra and assign required API permissions. For this exercise, we will do this graphically in the portal.
