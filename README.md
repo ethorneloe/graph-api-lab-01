@@ -1,12 +1,12 @@
 # graph-api-lab-01
-Connect to Entra with the Microsoft Graph PowerShell SDK.
 
-## Goals
+# Lab goals
+Use the Microsoft PowerShell Graph SDK and Az module to:
 1. Explore how to connect to the Graph API using a client secret, a certificate, and a managed identity in an automation account.
 2. Create required objects in Azure such as an app registration, managed identity, and an Automation Account runbook.
 
 
-# Part 1 - Install PowerShell Modules
+# Part 1 - Install PowerShell modules
 Before continuing make sure the `Microsoft.Graph` and `Az` modules are installed.
 
 1. Run `Get-Module -ListAvailable Microsoft.Graph*`
@@ -96,7 +96,7 @@ Connect-MgGraph -TenantId $tenantId -ClientSecretCredential $cred
 ```
 
 5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
-6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`.
+6. You should see user details output in the console.  Once confirmed disconnect your session by running `Disconnect-MgGraph`.
 
 # Part 4 - Configure a certificate and retrieve user information
 ## Option 1 - Self-signed certificate
@@ -150,7 +150,7 @@ Connect-MgGraph `
 ```
 
 5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
-6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`.
+6. You should see user details output in the console.  Once confirmed disconnect your session by running `Disconnect-MgGraph`.
 
 ## Option 2 - Create a certificate using internal PKI (Windows Certificate Services shown here)
 Note that this is a rough guide only for demonstration purposes.  The exact steps will depend on the certificate templates available and the certificate services configuration specific to your environment.
@@ -243,7 +243,7 @@ Certreq -attrib "CertificateTemplate:YourCertificateTemplate" -submit  "C:\temp
 18. Follow the same steps in `Option 1 - Self-signed certificate` earlier to upload and connect with the certificate thumbprint.
 
 # Part 5 - Create an automation account with a system-assigned managed identity
-An automation account allows us to create PowerShell runbooks, which can be executed in the context of a system-assigned managed identity.  Note that in order to complete these instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
+An automation account allows us to create PowerShell runbooks, which can be executed in the context of a system-assigned managed identity.  Managed identities are a secure approach within Entra as they do not require rotation of a secret or certificate.  Note that in order to complete these instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
 
 1. Connect to your subscription using the Az module. 
 ```
