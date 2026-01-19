@@ -332,6 +332,10 @@ New-AzAutomationModule `
 ```
 # Create the runbook script content
 $runbookContent = @'
+#Import required modules
+Import-Module 'Microsoft.Graph.Authentication'
+Import-Module 'Microsoft.Graph.Users'
+
 # Connect to Microsoft Graph using managed identity
 Connect-MgGraph -Identity
 
@@ -363,8 +367,8 @@ Import-AzAutomationRunbook `
 Remove-Item $tempFile
 ```
 <img width="669" height="364" alt="image" src="https://github.com/user-attachments/assets/a5573f29-429a-40e8-bba7-525942219e94" />
-< br />
-< br />
+<br />
+<br />
 
 5. Create a new job to execute the runbook.
 ```
@@ -384,6 +388,10 @@ Get-AzAutomationJob `
     -AutomationAccountName $automationAccount `
     -Id $job.JobId | Select-Object Status, StartTime, EndTime
 ```
+<img width="852" height="89" alt="image" src="https://github.com/user-attachments/assets/37372af6-faef-4937-8e2f-570096ed07e4" />
+<br />
+<br />
+
 7. View the output of the job.  You should see user data.
 ```
 Get-AzAutomationJobOutput `
