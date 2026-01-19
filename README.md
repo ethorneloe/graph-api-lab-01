@@ -299,7 +299,6 @@ Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 
 4. Install the `Microsoft.Graph.Authentication` module into the Azure Automation sandbox. This is the execution environment for runbooks within the Azure cloud.
 ```
-# Import Authentication module first
 New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
@@ -309,7 +308,6 @@ New-AzAutomationModule `
 
 5. Wait a couple minutes.  Check the status of the installed modules using the command below. Once it is complete this command will show `ProvisioningState` set to `Succeeded`.
 ```
-# Check the status of Graph modules
 Get-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount | 
@@ -323,7 +321,6 @@ Get-AzAutomationModule `
 
 6. Once confirmed, install the `Microsoft.Graph.Users` module. Use the same command from earlier on to check the status of the module installation.
 ```
-# Wait ~5 minutes, then import Users module
 New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
@@ -365,6 +362,9 @@ Import-AzAutomationRunbook `
 # Clean up temp file
 Remove-Item $tempFile
 ```
+<img width="669" height="364" alt="image" src="https://github.com/user-attachments/assets/a5573f29-429a-40e8-bba7-525942219e94" />
+< br />
+< br />
 
 5. Create a new job to execute the runbook.
 ```
