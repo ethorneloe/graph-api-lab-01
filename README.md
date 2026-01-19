@@ -86,8 +86,8 @@ In order to connect to the Graph API as an application, we must first register a
 
 4. In your PowerShell session edit and run the following to connect to your tenant with the new app registration and the new client secret.
 ```
-$tenantId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $clientId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+$tenantId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 $secureSecret = Read-Host "Enter client secret" -AsSecureString
 $cred = [pscredential]::new($clientId, $secureSecret)
