@@ -303,7 +303,7 @@ New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Name "Microsoft.Graph.Authentication" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication" `
+    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication/2.33.0" `
     -RuntimeVersion "7.2"
 ```
 
@@ -327,7 +327,7 @@ New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Name "Microsoft.Graph.Users" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users" `
+    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users/2.33.0" `
     -RuntimeVersion "7.2"
 ```
 
