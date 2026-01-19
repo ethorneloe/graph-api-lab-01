@@ -389,10 +389,10 @@ Remove-AzADApplication -ApplicationId $clientId
 # Remove resource group
 Remove-AzResourceGroup -Name $resourceGroup -Force
 
-# Clear the Az context
+# Clear Az context
 Disconnect-AzAccount -ErrorAction SilentlyContinue | Out-Null
 
-# Clear Graph API Context
+# Clear Graph context
 Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 
 ```
