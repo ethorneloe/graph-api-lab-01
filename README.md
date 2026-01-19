@@ -370,7 +370,23 @@ Get-AzAutomationJobOutput `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Id $job.JobId `
-    -Stream Output | Get-AzAutomationJobOutputRecord | Select-Object -ExpandProperty Value
+    -Stream Output | Get-AzAutomationJobOutputRecord | Select-Object Summary
+```
+
+8. The lab is now complete.  Clean up by removing the app registration and the resource group.
+```
+# Remove the app registration
+Remove-AzADApplication -ApplicationId $clientId
+
+# Remove resource group
+Remove-AzResourceGroup -Name $resourceGroup -Force
+
+# Clear the Az context
+Disconnect-AzAccount -ErrorAction SilentlyContinue | Out-Null
+
+# Clear Graph API Context
+Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
+
 ```
 
 # Review
