@@ -47,7 +47,7 @@ In order to connect to the Graph API as an application, we must first register a
 <br />
 <br />
 
-3. Select `Application permissions`
+3. Select `Application permissions`.
 <img width="523" height="369" alt="image" src="https://github.com/user-attachments/assets/29356e60-63a5-40b3-a394-d5a398a0755f" />
 <br />
 <br />
@@ -69,7 +69,7 @@ In order to connect to the Graph API as an application, we must first register a
 <br />
 
 # Part 3 - Create a client secret and retrieve user information
-1. Select the `Certificates and Secrets` section, then select `Client secrets` and click on `New client secret`
+1. Select the `Certificates and Secrets` section, then select `Client secrets` and click on `New client secret`.
 <img width="724" height="547" alt="image" src="https://github.com/user-attachments/assets/22efa8f7-1889-4600-88a3-91c3b72b3716" />
 <br />
 <br />
@@ -95,10 +95,8 @@ $cred = [pscredential]::new($clientId, $secureSecret)
 Connect-MgGraph -TenantId $tenantId -ClientSecretCredential $cred
 ```
 
-5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`
-6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`
-<br />
-<br />
+5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
+6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`.
 
 # Part 4 - Configure a certificate and retrieve user information
 ## Option 1 - Self-signed certificate
@@ -115,7 +113,7 @@ $cert = New-SelfSignedCertificate `
 
 ```
 
-2. Confirm the certificate was created by running `Get-ChildItem Cert:\CurrentUser\My | Where-Object Subject -like "*graph-api-lab-01*"`
+2. Confirm the certificate was created by running `Get-ChildItem Cert:\CurrentUser\My | Where-Object Subject -like "*graph-api-lab-01*"`.
 
 3. Run the following to export the public cert.  We will upload this to the new app registration later.
 `Export-Certificate -Cert $cert -FilePath "C:\temp\graph-api-lab-01.cer"`
@@ -151,24 +149,23 @@ Connect-MgGraph `
 
 ```
 
-5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`
-6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`
+5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
+6. You should see user details output in the console.  Once confirmed disconnect from graph by running `Disconnect-MgGraph`.
 
 ## Option 2 - Create a certificate using internal PKI (Windows Certificate Services shown here)
-
 Note that this is a rough guide only for demonstration purposes.  The exact steps will depend on the certificate templates available and the certificate services configuration specific to your environment.
 
-1. Use windows button+r, type `mmc`
+1. Use windows button+r, type `mmc`.
 <img width="393" height="200" alt="image" src="https://github.com/user-attachments/assets/4e199fd5-6ecc-4f47-9ff2-21444b95d2bf" />
 <br />
 <br />
 
-2. Add a new snap-in
+2. Add a new snap-in.
 <img width="378" height="354" alt="image" src="https://github.com/user-attachments/assets/ab0ec5da-a738-4e33-80cf-fff151ccfe9b" />
 <br />
 <br />
 
-3. Select `Certificates` and click on `Add` 
+3. Select `Certificates` and click on `Add`.
 <img width="531" height="356" alt="image" src="https://github.com/user-attachments/assets/e8359ea1-2aa1-417c-9ca1-b57f4a3d567b" />
 <img width="664" height="470" alt="image" src="https://github.com/user-attachments/assets/3fedf5d6-8dcd-4c1f-bfef-56f377bb0c42" />
 <br />
@@ -179,7 +176,7 @@ Note that this is a rough guide only for demonstration purposes.  The exact step
 <br />
 <br />
 
-5. Proceed without an enrollment policy
+5. Proceed without an enrollment policy.
 <img width="624" height="457" alt="image" src="https://github.com/user-attachments/assets/dbf12f81-6505-41f2-b051-87980af655bc" />
 <br />
 <br />
@@ -189,12 +186,12 @@ Note that this is a rough guide only for demonstration purposes.  The exact step
 <br />
 <br />
 
-7. Select the details drop down and then click on `Properties`
+7. Select the details drop down and then click on `Properties`.
 <img width="622" height="304" alt="image" src="https://github.com/user-attachments/assets/e3bda1cd-99af-494d-a599-9cbb87200927" />
 <br />
 <br />
 
-8. Configure a friendly name
+8. Configure a friendly name.
 <img width="489" height="191" alt="image" src="https://github.com/user-attachments/assets/e53c3c04-2744-46bb-bf1d-9be0fadd1cba" />
 <br />
 <br />
@@ -214,22 +211,22 @@ Note that this is a rough guide only for demonstration purposes.  The exact step
 <br />
 <br />
 
-12. Set the following for the Private Key settings
+12. Set the following for the Private Key settings.
 <img width="493" height="267" alt="image" src="https://github.com/user-attachments/assets/c713b507-7162-4864-b674-f6cbe6bcb528" />
 <br />
 <br />
 
-13. Go back through all the settings and confirm they look ok.  Once done click `OK`
+13. Go back through all the settings and confirm they look ok.  Once done click `OK`.
 <img width="489" height="494" alt="image" src="https://github.com/user-attachments/assets/d4d85d80-efe4-4dde-bee4-8bb652fca531" />
 <br />
 <br />
 
-14. Now click on `Next`
+14. Now click on `Next`.
 <img width="620" height="445" alt="image" src="https://github.com/user-attachments/assets/58b48b0d-6886-4a7c-b362-d03594bea171" />
 <br />
 <br />
 
-15.  Select a location for the offline request and click on `Finish`
+15.  Select a location for the offline request and click on `Finish`.
 <img width="620" height="453" alt="image" src="https://github.com/user-attachments/assets/b78cb4c2-6a86-4a9d-b9d3-2a4bb10f75dc" />
 
 <br />
