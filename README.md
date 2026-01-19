@@ -270,6 +270,11 @@ New-AzAutomationAccount `
     -Plan Basic `
     -AssignSystemIdentity
 ```
+<img width="1295" height="130" alt="image" src="https://github.com/user-attachments/assets/7e609af0-26dc-4519-9e98-03888d2bdbcd" />
+<img width="1123" height="309" alt="image" src="https://github.com/user-attachments/assets/16c30bfa-3802-4a22-b3f9-3c01abffdadf" />
+<br />
+<br />
+
 3. Grant API permissions to the system-assigned managed identity.  Earlier we granted API permissions graphically, but for this exercise we will use the Az module.
 ```
 $identity = (Get-AzAutomationAccount -ResourceGroupName $resourceGroup -Name $automationAccount).Identity.PrincipalId
@@ -288,6 +293,9 @@ New-MgServicePrincipalAppRoleAssignment `
 
 Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 ```
+<img width="1453" height="92" alt="image" src="https://github.com/user-attachments/assets/3eecb4e1-ad25-463e-a23a-64eddf85bff2" />
+<br />
+<br />
 
 4. Install the `Microsoft.Graph.Authentication` module into the Azure Automation sandbox. This is the execution environment for runbooks within the Azure cloud.
 ```
@@ -310,9 +318,10 @@ Get-AzAutomationModule `
     Format-Table -AutoSize
 ```
 <img width="1053" height="87" alt="image" src="https://github.com/user-attachments/assets/7fb40833-6f09-4d65-8cd2-84967d15909d" />
+<br />
+<br />
 
-
-6. Once confirmed, install the `Microsoft.Graph.Users` module.
+6. Once confirmed, install the `Microsoft.Graph.Users` module. Use the same command from earlier on to check the status of the module installation.
 ```
 # Wait ~5 minutes, then import Users module
 New-AzAutomationModule `
