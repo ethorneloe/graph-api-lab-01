@@ -369,7 +369,7 @@ Import-AzAutomationRunbook `
 # Clean up temp file
 Remove-Item $tempFile
 ```
-<img width="669" height="364" alt="image" src="https://github.com/user-attachments/assets/a5573f29-429a-40e8-bba7-525942219e94" />
+<img width="665" height="359" alt="image" src="https://github.com/user-attachments/assets/7240a0a3-5494-48c0-ba85-65ee9f3cdad7" />
 <br />
 <br />
 
