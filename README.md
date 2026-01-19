@@ -303,14 +303,16 @@ New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Name "Microsoft.Graph.Authentication" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication"
+    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication" `
+    -RuntimeVersion "7.2"
 ```
 
 5. Wait a couple minutes.  Check the status of the installed modules using the command below. Once it is complete this command will show `ProvisioningState` set to `Succeeded`.
 ```
 Get-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
-    -AutomationAccountName $automationAccount | 
+    -AutomationAccountName $automationAccount `
+    -RuntimeVersion "7.2" | 
     Where-Object {$_.Name -like "Microsoft.Graph.*"} | 
     Select-Object Name, Version, ProvisioningState, CreationTime | 
     Format-Table -AutoSize
@@ -325,7 +327,8 @@ New-AzAutomationModule `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Name "Microsoft.Graph.Users" `
-    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users"
+    -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users" `
+    -RuntimeVersion "7.2"
 ```
 
 4. Now that the modules are installed. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
@@ -359,7 +362,7 @@ Import-AzAutomationRunbook `
     -ResourceGroupName $resourceGroup `
     -AutomationAccountName $automationAccount `
     -Name "Get-EntraUsers" `
-    -Type PowerShell `
+    -Type PowerShell72 `
     -Path $tempFile `
     -Published
 
