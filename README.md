@@ -84,7 +84,7 @@ In order to connect to the Graph API as an application, we must first register a
 <br />
 <br />
 
-4. In your PowerShell session edit and run the following to connect to your tenant with the new app registration and the new client secret.
+4. In your PowerShell session edit and run the following to connect to your tenant with the new app registration and the new client secret.  You should see a message that says `Welcome to Microsoft Graph!` along with some output relating to your session and documentation links.
 ```
 $clientId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $tenantId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
@@ -95,8 +95,11 @@ $cred = [pscredential]::new($clientId, $secureSecret)
 Connect-MgGraph -TenantId $tenantId -ClientSecretCredential $cred
 ```
 
-5. Retrieve information for a random user by running the following `Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName`.
-6. You should see user details output in the console.  Once confirmed disconnect your session by running `Disconnect-MgGraph`.
+5. Retrieve information for a random user by running the following. You should see user details output in the console.
+```
+Get-MgUser -Top 50 | Get-Random | Select DisplayName, UserPrincipalName
+```
+6. Disconnect your session by running `Disconnect-MgGraph`.
 
 # Part 4 - Configure a certificate and retrieve user information
 ## Option 1 - Self-signed certificate
