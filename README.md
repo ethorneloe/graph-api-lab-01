@@ -289,12 +289,12 @@ New-MgServicePrincipalAppRoleAssignment `
 Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
 ```
 
-4. Install the Graph Authentication module into the Azure Automation sandbox. This is the execution environment for runbooks within the Azure cloud.
+4. Install the `Microsoft.Graph.Authentication` module into the Azure Automation sandbox. This is the execution environment for runbooks within the Azure cloud.
 ```
 # Import Authentication module first
 New-AzAutomationModule `
-    -ResourceGroupName "your-rg" `
-    -AutomationAccountName "your-aa" `
+    -ResourceGroupName $resourceGroup `
+    -AutomationAccountName $automationAccount `
     -Name "Microsoft.Graph.Authentication" `
     -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication"
 ```
@@ -310,7 +310,7 @@ Get-AzAutomationModule `
     Format-Table -AutoSize
 ```
 
-6. Once confirmed, install the Graph users module
+6. Once confirmed, install the `Microsoft.Graph.Users` module.
 ```
 # Wait ~5 minutes, then import Users module
 New-AzAutomationModule `
@@ -321,7 +321,6 @@ New-AzAutomationModule `
 ```
 
 4. Now that the modules are installed. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
-4. Run the code below to create a new runbook that uses the managed identity to connect to the Graph API.
 ```
 # Create the runbook script content
 $runbookContent = @'
