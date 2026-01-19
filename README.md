@@ -299,7 +299,7 @@ New-AzAutomationModule `
     -ContentLinkUri "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication"
 ```
 
-5. Wait around 5 minutes.  Check the status of the installed modules using the command below.
+5. Wait a couple minutes.  Check the status of the installed modules using the command below. Once it is complete this command will show `ProvisioningState` set to `Succeeded`.
 ```
 # Check the status of Graph modules
 Get-AzAutomationModule `
@@ -309,6 +309,8 @@ Get-AzAutomationModule `
     Select-Object Name, Version, ProvisioningState, CreationTime | 
     Format-Table -AutoSize
 ```
+<img width="1053" height="87" alt="image" src="https://github.com/user-attachments/assets/7fb40833-6f09-4d65-8cd2-84967d15909d" />
+
 
 6. Once confirmed, install the `Microsoft.Graph.Users` module.
 ```
