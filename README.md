@@ -246,7 +246,7 @@ Certreq -attrib "CertificateTemplate:YourCertificateTemplate" -submit  "C:\temp
 18. Follow the same steps in `Option 1 - Self-signed certificate` earlier to upload and connect with the certificate thumbprint.
 
 # Part 5 - Create an automation account with a system-assigned managed identity
-An automation account allows us to create PowerShell runbooks, which can be executed in the context of a system-assigned managed identity.  Managed identities are a secure approach within Entra as they do not require rotation of a secret or certificate.  Note that in order to complete these instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.
+An automation account allows us to create PowerShell runbooks, which can be executed in the context of a system-assigned managed identity.  Managed identities are a secure approach within Entra as they do not require rotation of a secret or certificate.  Note that in order to complete these instructions you will need to authenticate with an account that has access to create resources in Azure and to assign API permissions to the Graph API.  If any of the steps below fail, make sure you have contributor access to your subscription, and either `Global Administrator` or `Privileged Role Administrator` assigned to your account.
 
 1. Connect to your subscription using the Az module. 
 ```
