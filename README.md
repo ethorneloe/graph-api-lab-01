@@ -126,7 +126,7 @@ Get-ChildItem Cert:\CurrentUser\My | Where-Object Subject -like "*graph-api-lab-
 Export-Certificate -Cert $cert -FilePath "C:\temp\graph-api-lab-01.cer"
 ```
 
-4. Navigate to the certificates and secrets section select `Upload certificate`.
+4. Navigate to the certificates and secrets section and select `Upload certificate`.
 <img width="738" height="679" alt="image" src="https://github.com/user-attachments/assets/81d85681-dcc2-4867-a850-b76539ab11a9" />
 <br />
 <br />
