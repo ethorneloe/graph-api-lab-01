@@ -37,7 +37,7 @@ In order to connect to the Graph API as an application, we must first register a
 
 ### Assign API permissions
 
-1. Select the `API permissions` section, and then click on `Add a permission`.  Note that we need to be a `Global Administrator` or `Privileged Role Administrator` to assign App-level API permissions for Microsoft Graph.
+1. Select the `API permissions` section, and then click on `Add a permission`.  Note that you need a `Global Administrator` or `Privileged Role Administrator` Entra role assignment to configure App-level API permissions for Microsoft Graph.
 <img width="747" height="675" alt="image" src="https://github.com/user-attachments/assets/c9c78bfd-2595-4fbc-926e-f3f271b24985" />
 <br />
 <br />
